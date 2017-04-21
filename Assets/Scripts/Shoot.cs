@@ -10,8 +10,7 @@ public class Shoot : MonoBehaviour {
 
 	void Update () {
 		timer += Time.deltaTime;
-		if (Input.GetButton ("Fire1"))
-		
+		if (InputManager.instance.Fire())
 		if (timer > speed) {
 			Instantiate (bullet, transform.position, transform.rotation);
 			timer = 0;
