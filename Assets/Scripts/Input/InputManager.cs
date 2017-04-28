@@ -14,13 +14,19 @@ public class InputManager : MonoBehaviour {
         }
 
 #if UNITY_EDITOR
-        input = new InputKeyboard();
-#elif UNITY_ANDROID
-        
+        //input = new InputKeyboard();
+//#elif UNITY_ANDROID
+        input = new InputMobile();
 #endif
+
     }
 
-     public Vector3 Movement()
+    public IInput getInput()
+    {
+        return input;
+    }
+
+    public Vector3 Movement()
     {
         return input.GetAxis();
     }
