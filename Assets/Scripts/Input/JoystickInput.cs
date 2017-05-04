@@ -4,8 +4,8 @@ using UnityEngine.EventSystems;
 
 public class JoystickInput : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    public Image bgImg;
-    public Image joystickImg;
+    Image bgImg;
+    Image joystickImg;
 
     private Vector3 inputVector;
 
@@ -28,7 +28,6 @@ public class JoystickInput : MonoBehaviour, IDragHandler, IPointerUpHandler, IPo
             joystickImg = transform.GetChild(0).GetComponent<Image>();
         }
     }
-
     public virtual void OnDrag(PointerEventData ped)
     {
         Vector2 pos;
@@ -61,12 +60,10 @@ public class JoystickInput : MonoBehaviour, IDragHandler, IPointerUpHandler, IPo
         inputVector = Vector3.zero;
         joystickImg.rectTransform.anchoredPosition = Vector3.zero;
     }
-
     public void getJoystickInput()
     {
         input.dir = inputVector;
     }
-
     private void Update()
     {
         getJoystickInput();

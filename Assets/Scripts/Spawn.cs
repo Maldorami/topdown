@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-			
-	}
+    public int space = 5;
 
 	public void SpawnEnemy(){
-		GameObject tmp = EnemyBuilder.Instance.Build (EnemyBuilder.EnemyType.zombie);
-		tmp.transform.position = gameObject.transform.position;
+		GameObject enemy = EnemyBuilder.Instance.Build (EnemyBuilder.EnemyType.zombie);
+        Vector3 enemyPos = new Vector3(gameObject.transform.position.x + Random.Range(-space, space), gameObject.transform.position.y, gameObject.transform.position.z + Random.Range(-space, space));
+		enemy.transform.position = enemyPos;
 	}
 
 }

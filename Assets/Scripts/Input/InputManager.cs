@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour {
         }
 
 #if UNITY_EDITOR
-        //input = new InputKeyboard();
+  //      input = new InputKeyboard();
 //#elif UNITY_ANDROID
         input = new InputMobile();
 #endif
