@@ -21,8 +21,8 @@ public class EnemyBuilder : MonoBehaviour {
 
 	public enum EnemyType{
 		zombie,
-		mommy,
-		spider
+		zombieFast,
+		bomber
 	}
 
 	public GameObject Build (EnemyType type){
@@ -33,8 +33,8 @@ public class EnemyBuilder : MonoBehaviour {
 		case (EnemyType.zombie):{
 				Rigidbody rg = go.AddComponent<Rigidbody> ();
 				BoxCollider bc = go.AddComponent<BoxCollider> ();
-				EnemyHealth eh = go.AddComponent<EnemyHealth> ();
 				EnemyDamage ed = go.AddComponent<EnemyDamage> ();
+				go.AddComponent<EnemyHealth> ();
 
 				EnemyMovement enmMov = go.AddComponent<EnemyMovement>();
 				rg.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
@@ -48,13 +48,33 @@ public class EnemyBuilder : MonoBehaviour {
 
 				ed.damage = 25;
 
+                go.tag = "Enemy";
 				return go;
 			}
-		case (EnemyType.mommy):{
-				go.AddComponent<EnemyMovement>();
-				return go;
+        case (EnemyType.zombieFast):
+            {
+                Rigidbody rg = go.AddComponent<Rigidbody>();
+                BoxCollider bc = go.AddComponent<BoxCollider>();
+                EnemyDamage ed = go.AddComponent<EnemyDamage>();
+                go.AddComponent<EnemyHealth>();
+
+                EnemyMovement enmMov = go.AddComponent<EnemyMovement>();
+                rg.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
+                enmMov.speed = 6;
+
+                Vector3 bound = new Vector3(0.1f, 0.1f, 0.1f);
+                Vector3 center = new Vector3(0, .1f, .02f);
+                bc.center = center;
+                bc.size = bound;
+                bc.isTrigger = true;
+
+                ed.damage = 25;
+
+                go.tag = "Enemy";
+                return go;
 			}
-		case (EnemyType.spider):{
+        case (EnemyType.bomber):
+            {
 				go.AddComponent<EnemyMovement>();
 				return go;
 			}

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
 	public float playerHealth = 100;
+    public GameObject player;
+
 
 	public static PlayerManager instance;
 	void Awake()
@@ -12,6 +14,9 @@ public class PlayerManager : MonoBehaviour {
 		if (!instance) {
 			instance = this;
 		}
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
 	}
 		
 	void Update () {

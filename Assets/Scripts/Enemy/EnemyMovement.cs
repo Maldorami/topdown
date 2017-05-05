@@ -14,6 +14,8 @@ public class EnemyMovement : MonoBehaviour {
 	bool distanceToDamage = false;
 
 	EnemyDamage ed;
+    Enemy en;
+    public bool isDeath;
 
 
 	GameObject player;
@@ -24,44 +26,59 @@ public class EnemyMovement : MonoBehaviour {
 		rg = GetComponent<Rigidbody> ();
 		anim = GetComponent<Animator> ();
 		ed = GetComponent<EnemyDamage> ();
+        en = GetComponent<Enemy>();
 	}
 
 	void Update () {
 		Vector3 look = new Vector3 (player.transform.position.x, 0, player.transform.position.z);
 
-		if (Vector3.Distance (transform.position, look) < 2) {
-			distanceToDamage = true;
-		} else {
-			distanceToDamage = false;
-		}
+        if (!isDeath)
+        {
+            if (Vector3.Distance(transform.position, look) < 2)
+            {
+                distanceToDamage = true;
+            }
+            else
+            {
+                distanceToDamage = false;
+            }
 
-		if (!distanceToDamage && move) {			
-			transform.LookAt (look);
-			rg.velocity = (transform.forward * speed);
-		} else {
-			tmp += Time.deltaTime;
+            if (!distanceToDamage && move)
+            {
+                transform.LookAt(look);
+                rg.velocity = (transform.forward * speed);
+            }
+            else
+            {
+                tmp += Time.deltaTime;
 
-			if (attack) {
-				anim.SetTrigger ("Attacking");
-				attack = false;
-				move = false;
-				rg.velocity = Vector3.zero;
-			} else {
-				if (distanceToDamage && tmp > .25f) {
-					Debug.Log("<color=yellow>zombie attack!</color>");
-					ed.DoDamageToPlayer ();
-					tmp = 0;
-				}
-			}
+                if (attack)
+                {
+                    anim.SetTrigger("Attacking");
+                    attack = false;
+                    move = false;
+                    rg.velocity = Vector3.zero;
+                }
+                else
+                {
+                    if (distanceToDamage && tmp > .25f)
+                    {
+                        Debug.Log("<color=yellow>zombie attack!</color>");
+                        ed.DoDamageToPlayer();
+                        tmp = 0;
+                    }
+                }
 
-			AttackTimer += Time.deltaTime;
-			if (AttackTimer > .5f) {
-				move = true;
-				attack = true;
-				AttackTimer = 0;
-				tmp = 0;
-			}
-		}
+                AttackTimer += Time.deltaTime;
+                if (AttackTimer > .5f)
+                {
+                    move = true;
+                    attack = true;
+                    AttackTimer = 0;
+                    tmp = 0;
+                }
 
+            }
+        }
 	}
 }

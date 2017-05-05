@@ -27,12 +27,13 @@ public class EnemyFactory : MonoBehaviour {
 				GameObject go = Resources.Load ("zombie", typeof(GameObject)) as GameObject;
 				return Instantiate (go);
 			}
-		case (EnemyBuilder.EnemyType.mommy):{
-				GameObject go = Resources.Load ("mommy", typeof(GameObject)) as GameObject;
+		case (EnemyBuilder.EnemyType.zombieFast):{
+				GameObject go = Resources.Load ("zombieFast", typeof(GameObject)) as GameObject;
 				return Instantiate (go);
 			}
-		case (EnemyBuilder.EnemyType.spider):{
-				GameObject go = Resources.Load ("spider", typeof(GameObject)) as GameObject;
+        case (EnemyBuilder.EnemyType.bomber):
+            {
+				GameObject go = Resources.Load ("bomber", typeof(GameObject)) as GameObject;
 				return Instantiate (go);
 			}
 		}
