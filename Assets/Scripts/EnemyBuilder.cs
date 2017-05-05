@@ -32,10 +32,21 @@ public class EnemyBuilder : MonoBehaviour {
 		switch (type) {
 		case (EnemyType.zombie):{
 				Rigidbody rg = go.AddComponent<Rigidbody> ();
-
+				BoxCollider bc = go.AddComponent<BoxCollider> ();
+				EnemyHealth eh = go.AddComponent<EnemyHealth> ();
+				EnemyDamage ed = go.AddComponent<EnemyDamage> ();
 
 				EnemyMovement enmMov = go.AddComponent<EnemyMovement>();
-				enmMov.speed = 5;
+				rg.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
+				enmMov.speed = 3;
+
+				Vector3 bound = new Vector3 (0.1f, 0.1f, 0.1f);
+				Vector3 center = new Vector3 (0, .1f, .02f);
+				bc.center = center;
+				bc.size = bound;
+				bc.isTrigger = true;
+
+				ed.damage = 25;
 
 				return go;
 			}

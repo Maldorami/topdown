@@ -10,6 +10,8 @@ public class SpawnManager : MonoBehaviour {
 	private float timer = 0;
 	public float spawnDelay = 2;
 
+	bool stop = false;
+
 	void Start(){
 
         if (!instance)
@@ -37,9 +39,11 @@ public class SpawnManager : MonoBehaviour {
 		if(timer > spawnDelay){
 			foreach (GameObject sp in spawnList) {
 				Spawn tmp = sp.GetComponent<Spawn> ();
-				tmp.SpawnEnemy ();
+				if (!stop) {
+					tmp.SpawnEnemy ();
+					stop = true;
+				}
 			}
-
 			timer = 0;
 		}
 	}
