@@ -14,6 +14,10 @@ public class PlayerManager : MonoBehaviour {
 		if (!instance) {
 			instance = this;
 		}
+        else
+        {
+            Destroy(gameObject);
+        }
 
         player = GameObject.FindGameObjectWithTag("Player");
 

@@ -41,7 +41,7 @@ public class SpawnManager : MonoBehaviour {
         get { return state; }
     }
 
-	void Start(){
+	void Awake(){
 
         if (!instance)
         {

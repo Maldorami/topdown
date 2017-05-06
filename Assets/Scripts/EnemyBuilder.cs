@@ -34,7 +34,10 @@ public class EnemyBuilder : MonoBehaviour {
 				Rigidbody rg = go.AddComponent<Rigidbody> ();
 				BoxCollider bc = go.AddComponent<BoxCollider> ();
 				EnemyDamage ed = go.AddComponent<EnemyDamage> ();
+                Enemy et = go.AddComponent<Enemy>();
+                et.type = type;
 				go.AddComponent<EnemyHealth> ();
+                EnemyScreenSpaceUIScript ess = go.AddComponent<EnemyScreenSpaceUIScript>();
 
 				EnemyMovement enmMov = go.AddComponent<EnemyMovement>();
 				rg.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
@@ -56,7 +59,10 @@ public class EnemyBuilder : MonoBehaviour {
                 Rigidbody rg = go.AddComponent<Rigidbody>();
                 BoxCollider bc = go.AddComponent<BoxCollider>();
                 EnemyDamage ed = go.AddComponent<EnemyDamage>();
+                Enemy et = go.AddComponent<Enemy>();
+                et.type = type;
                 go.AddComponent<EnemyHealth>();
+                EnemyScreenSpaceUIScript ess = go.AddComponent<EnemyScreenSpaceUIScript>();
 
                 EnemyMovement enmMov = go.AddComponent<EnemyMovement>();
                 rg.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
@@ -70,13 +76,35 @@ public class EnemyBuilder : MonoBehaviour {
 
                 ed.damage = 25;
 
+                
+
                 go.tag = "Enemy";
                 return go;
 			}
         case (EnemyType.bomber):
             {
-				go.AddComponent<EnemyMovement>();
-				return go;
+                Rigidbody rg = go.AddComponent<Rigidbody>();
+                BoxCollider bc = go.AddComponent<BoxCollider>();
+                BomberDamage ed = go.AddComponent<BomberDamage>();
+                Enemy et = go.AddComponent<Enemy>();
+                et.type = type;
+                go.AddComponent<EnemyHealth>();
+                EnemyScreenSpaceUIScript ess = go.AddComponent<EnemyScreenSpaceUIScript>();
+
+                BomberEnemyMovement enmMov = go.AddComponent<BomberEnemyMovement>();
+                rg.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
+                enmMov.speed = 6;
+
+                Vector3 bound = new Vector3(0.1f, 0.1f, 0.1f);
+                Vector3 center = new Vector3(0, .1f, .02f);
+                bc.center = center;
+                bc.size = bound;
+                bc.isTrigger = true;
+
+                ed.damage = 75;
+
+                go.tag = "Enemy";
+                return go;
 			}
 		}
 

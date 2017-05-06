@@ -12,6 +12,10 @@ public class InputManager : MonoBehaviour {
         if (!instance){
             instance = this;
         }
+        else
+        {
+            Destroy(gameObject);
+        }
 
 #if UNITY_EDITOR
         input = new InputKeyboard();

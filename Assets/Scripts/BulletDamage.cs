@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class BulletDamage : MonoBehaviour {
 
-    public EnemyBuilder.EnemyType type;
+    public float damage = 10;
 
 }

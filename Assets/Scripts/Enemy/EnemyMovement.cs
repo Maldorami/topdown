@@ -15,7 +15,7 @@ public class EnemyMovement : MonoBehaviour {
 
 	EnemyDamage ed;
     Enemy en;
-    public bool isDeath;
+    public bool isDeath; 
 
 
 	GameObject player;
