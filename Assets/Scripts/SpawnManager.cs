@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour {
 
-	private static SpawnManager instance;
+	public static SpawnManager instance;
 
     public enum SpawnState { SPAWNING, WAITING, COUNTING };
 

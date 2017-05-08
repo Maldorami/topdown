@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
-	public float playerHealth = 100;
+	public float playerHealth;
+    public float maxPlayerHealth = 100;
+    
     public GameObject player;
 
 
@@ -20,7 +22,7 @@ public class PlayerManager : MonoBehaviour {
         }
 
         player = GameObject.FindGameObjectWithTag("Player");
-
+        playerHealth = maxPlayerHealth;
 	}
 		
 	void Update () {
