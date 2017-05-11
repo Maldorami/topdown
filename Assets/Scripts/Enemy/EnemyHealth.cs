@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour {
 	void OnTriggerEnter(Collider hit){
 		if (hit.tag == "Bullet") {
 			health -= hit.gameObject.GetComponent<BulletDamage>().damage;
-            Destroy(hit.gameObject);
+            //Destroy(hit.gameObject);
 		}
 	}
 

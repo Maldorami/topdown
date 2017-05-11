@@ -20,4 +20,15 @@ public class BulletMovement : MonoBehaviour {
 	void Update () {
 		rg.velocity = (velocity);
 	}
+
+    void OnTriggerEnter(Collider hit)
+    {
+        if (hit.tag != "Player" && hit.tag != "Bullet")
+        Destroy(gameObject);
+    }
+    void OnCollisionEnter(Collision hit)
+    {
+        if (hit.gameObject.tag != "Player" && hit.gameObject.tag != "Bullet")
+        Destroy(gameObject);
+    }
 }

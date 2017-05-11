@@ -1,36 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class EnemyMovement : MonoBehaviour {
+public class EnemyMovement : MonoBehaviour
+{
 
-	public float speed;
-	public Animator anim;
+    public float speed;
+    public Animator anim;
 
-	float AttackTimer;
-	float tmp = 0;
-	bool attack = true;
-	bool move = true;
-	bool distanceToDamage = false;
+    float AttackTimer;
+    float tmp = 0;
+    bool attack = true;
+    bool move = true;
+    bool distanceToDamage = false;
 
-	EnemyDamage ed;
+    EnemyDamage ed;
     Enemy en;
-    public bool isDeath; 
+    public bool isDeath;
 
+    NavMeshAgent nma;
 
-	GameObject player;
-	Rigidbody rg;
+    GameObject player;
+    Rigidbody rg;
 
-	void Start () {
-		player = GameObject.FindGameObjectWithTag ("Player");
-		rg = GetComponent<Rigidbody> ();
-		anim = GetComponent<Animator> ();
-		ed = GetComponent<EnemyDamage> ();
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        rg = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+        ed = GetComponent<EnemyDamage>();
         en = GetComponent<Enemy>();
-	}
+        nma = GetComponent<NavMeshAgent>();
+        nma.speed = speed;
+    }
 
-	void Update () {
-		Vector3 look = new Vector3 (player.transform.position.x, 0, player.transform.position.z);
+    void Update()
+    {
+        Vector3 look = new Vector3(player.transform.position.x, 0, player.transform.position.z);
 
         if (!isDeath)
         {
@@ -45,8 +52,7 @@ public class EnemyMovement : MonoBehaviour {
 
             if (!distanceToDamage && move)
             {
-                transform.LookAt(look);
-                rg.velocity = (transform.forward * speed);
+                nma.destination = look;
             }
             else
             {
@@ -78,7 +84,15 @@ public class EnemyMovement : MonoBehaviour {
                     tmp = 0;
                 }
 
+                if (move)
+                    rg.isKinematic = true;
+                else
+                    rg.isKinematic = false;
             }
         }
-	}
+        else
+        {
+            nma.speed = 0f;
+        }
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 using UnityEngine;
 
 public class BomberEnemyMovement : MonoBehaviour
@@ -19,6 +20,8 @@ public class BomberEnemyMovement : MonoBehaviour
 
     bool alreadyAttack = false;
 
+    NavMeshAgent nma;
+
 	GameObject player;
 	Rigidbody rg;
 
@@ -28,6 +31,9 @@ public class BomberEnemyMovement : MonoBehaviour
 		anim = GetComponent<Animator> ();
         ed = GetComponent<BomberDamage>();
         en = GetComponent<Enemy>();
+
+        nma = GetComponent<NavMeshAgent>();
+        nma.speed = speed;
 	}
 
 	void Update () {
@@ -46,8 +52,8 @@ public class BomberEnemyMovement : MonoBehaviour
 
             if (!distanceToDamage && move)
             {
-                transform.LookAt(look);
-                rg.velocity = (transform.forward * speed);
+                nma.destination = look;
+                nma.speed = speed;
             }
             else
             {
@@ -78,7 +84,7 @@ public class BomberEnemyMovement : MonoBehaviour
         }
         else
         {
-
+            nma.speed = 0f;
         }
 	}
 }
