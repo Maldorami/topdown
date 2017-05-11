@@ -9,6 +9,8 @@ public class PlayerManager : MonoBehaviour {
     
     public GameObject player;
 
+    private bool isDeath = false;
+
 
 	public static PlayerManager instance;
 	void Awake()
@@ -27,7 +29,12 @@ public class PlayerManager : MonoBehaviour {
 		
 	void Update () {
 		if (playerHealth <= 0) {
-			Debug.Log("<color=red>PLAYER DEATH!</color>");
+            if (!isDeath)
+            {
+			    Debug.Log("<color=red>PLAYER DEATH!</color>");
+                MasterCanvasController.instance.endGame();
+                isDeath = true;
+            }
 		}
 	}
 
