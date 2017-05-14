@@ -8,6 +8,8 @@ public class EnemyHealth : MonoBehaviour {
     public float MaxHealth = 100;
 
     float tmp;
+    public GameObject ammobox;
+
     Animator anim;
     EnemyMovement em;
     BomberEnemyMovement bem;
@@ -34,7 +36,8 @@ public class EnemyHealth : MonoBehaviour {
 	}
 
 	void Update(){
-		if (health <= 0) {
+        if (health <= 0)
+        {
             if (em) em.isDeath = true;
             else bem.isDeath = true;
 
@@ -48,7 +51,15 @@ public class EnemyHealth : MonoBehaviour {
             if (ess) ess.DisableHealthPanel();
 
             tmp += Time.deltaTime;
-            if(tmp > 2.8f) Destroy (gameObject);
-		}
+            if (tmp > 2.8f)
+            {
+                if (Random.Range(0, 5) == 0)
+                {
+                    ammobox.GetComponent<AmmoBox>().bulletsToGive = Random.Range(20, 50);
+                    Instantiate(ammobox, transform.position, transform.rotation);
+                }                
+                Destroy(gameObject);
+            }
+        }
 	}
 }

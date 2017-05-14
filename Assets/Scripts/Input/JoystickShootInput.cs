@@ -79,7 +79,7 @@ public class JoystickShootInput : MonoBehaviour, IDragHandler, IPointerUpHandler
             input.vist = inputVector + player.transform.position;
             Debug.Log(input.vist);
 
-            if (inputVector.magnitude > .8f)
+            if (inputVector.magnitude > .9f)
             {
                 input.fire = true;
             }

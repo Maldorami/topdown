@@ -29,11 +29,13 @@ public class EnemyScreenSpaceUIScript : MonoBehaviour {
 
         Vector3 worldPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + healthPanelOffset);
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
+        if(healthPanel)
         healthPanel.transform.position = new Vector3(screenPos.x, screenPos.y, screenPos.z);
     }
 
     public void DisableHealthPanel()
     {
-        if(healthPanel) healthPanel.SetActive(false);
+        if (healthPanel) Destroy(healthPanel);
     }
 }
