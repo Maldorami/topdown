@@ -65,6 +65,7 @@ public class BomberEnemyMovement : MonoBehaviour
                     attack = false;
                     move = false;
                     rg.velocity = Vector3.zero;
+					nma.speed = 0.00001f;
                 }
                 else
                 {
@@ -84,7 +85,7 @@ public class BomberEnemyMovement : MonoBehaviour
         }
         else
         {
-            nma.speed = 0f;
+			nma.speed = 0.00001f;
         }
 	}
 }

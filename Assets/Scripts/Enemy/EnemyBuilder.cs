@@ -43,6 +43,8 @@ public class EnemyBuilder : MonoBehaviour {
                 NavMeshAgent nma = go.AddComponent<NavMeshAgent>();
                 nma.radius = 0.06f;
                 nma.height = 0.18f;
+				nma.stoppingDistance = 0f;
+				nma.acceleration = 100f;
 
 				EnemyMovement enmMov = go.AddComponent<EnemyMovement>();
 				rg.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
@@ -74,6 +76,8 @@ public class EnemyBuilder : MonoBehaviour {
                 NavMeshAgent nma = go.AddComponent<NavMeshAgent>();
                 nma.radius = 0.06f;
                 nma.height = 0.18f;
+				nma.stoppingDistance = 0f;
+				nma.acceleration = 100f;
 
                 EnemyMovement enmMov = go.AddComponent<EnemyMovement>();
                 rg.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
@@ -104,6 +108,8 @@ public class EnemyBuilder : MonoBehaviour {
                 NavMeshAgent nma = go.AddComponent<NavMeshAgent>();
                 nma.radius = 0.06f;
                 nma.height = 0.18f;
+				nma.stoppingDistance = 0f;
+				nma.acceleration = 100f;
 
                 BomberEnemyMovement enmMov = go.AddComponent<BomberEnemyMovement>();
                 rg.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;

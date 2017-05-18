@@ -37,7 +37,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        Vector3 look = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+		Vector3 look = PlayerManager.instance.player.transform.position;
 
         if (!isDeath)
         {
@@ -52,7 +52,8 @@ public class EnemyMovement : MonoBehaviour
 
             if (!distanceToDamage && move)
             {
-                nma.destination = look;
+				nma.destination = look;
+				nma.speed = speed;
             }
             else
             {
@@ -64,6 +65,7 @@ public class EnemyMovement : MonoBehaviour
                     attack = false;
                     move = false;
                     rg.velocity = Vector3.zero;
+					nma.speed = 0.00001f;
                 }
                 else
                 {
@@ -92,7 +94,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            nma.speed = 0f;
+            nma.speed = 0.00001f;
         }
     }
 }
