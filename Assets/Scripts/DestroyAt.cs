@@ -6,12 +6,17 @@ public class DestroyAt : MonoBehaviour {
 
 	public float timer = 5;
 	float tmp;
-	
-	// Update is called once per frame
+
+    void OnEnable()
+    {
+        tmp = 0;
+    }
+
 	void Update () {
 		tmp += Time.deltaTime;
+
 		if (tmp > timer) {
-			Destroy (gameObject);
+            GetComponent<PoolObject>().Recycl();
 		}
 	}
 }

@@ -8,13 +8,44 @@ public class Spawn : MonoBehaviour {
     public Canvas canvas;
     public GameObject healthPrefab;
     public GameObject AmmoBox;
+
+    public Pool ZombiePool;
+    public Pool ZombieFastPool;
+    public Pool BomberPool;
+    public Pool HealthBarPool;
     
 	public void SpawnEnemy(EnemyBuilder.EnemyType type){
-		GameObject enemy = EnemyBuilder.Instance.Build (type);
+
+        GameObject enemy;
+
+        switch (type)
+        {
+            case (EnemyBuilder.EnemyType.zombie):
+                {
+                    enemy = ZombiePool.Spawn().gameObject;
+                    break;
+                }
+            case (EnemyBuilder.EnemyType.zombieFast):
+                {
+                    enemy = ZombieFastPool.Spawn().gameObject;
+                    break;
+                }
+            case (EnemyBuilder.EnemyType.bomber):
+                {
+                    enemy = BomberPool.Spawn().gameObject;
+                    break;
+                }
+            default:
+                {
+                    enemy = ZombiePool.Spawn().gameObject;
+                    break;
+                }
+        }
 
         EnemyScreenSpaceUIScript ess = enemy.GetComponent<EnemyScreenSpaceUIScript>();
         ess.canvas = canvas;
-        ess.healthPrefab = healthPrefab;
+        ess.enemyScript = enemy.GetComponent<EnemyHealth>();
+        ess.HealthBarPoolManager = HealthBarPool;
 
         enemy.GetComponent<EnemyHealth>().ammobox = AmmoBox;
 

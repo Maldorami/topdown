@@ -23,7 +23,6 @@ public class BomberDamage : MonoBehaviour
         Body = tmp.gameObject;
 
         ess = gameObject.GetComponent<EnemyScreenSpaceUIScript>();
-
     }
 
     public void Attack(bool condition)

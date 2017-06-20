@@ -25,13 +25,17 @@ public class EnemyHealth : MonoBehaviour {
         bem = gameObject.GetComponent<BomberEnemyMovement>();
         bc = gameObject.GetComponent<BoxCollider>();
         ess = gameObject.GetComponent<EnemyScreenSpaceUIScript>();
+        ess.enemyScript = this;
+    }
+
+    void OnEnable()
+    {
         health = MaxHealth;
     }
 
 	void OnTriggerEnter(Collider hit){
 		if (hit.tag == "Bullet") {
 			health -= hit.gameObject.GetComponent<BulletDamage>().damage;
-            //Destroy(hit.gameObject);
 		}
 	}
 
@@ -57,8 +61,9 @@ public class EnemyHealth : MonoBehaviour {
                 {
                     ammobox.GetComponent<AmmoBox>().bulletsToGive = Random.Range(20, 50);
                     Instantiate(ammobox, transform.position, transform.rotation);
-                }                
-                Destroy(gameObject);
+                }
+
+                GetComponent<PoolObject>().Recycl();
             }
         }
 	}

@@ -36,6 +36,15 @@ public class BomberEnemyMovement : MonoBehaviour
         nma.speed = speed;
 	}
 
+    void OnEnable()
+    {
+        tmp = 0;
+        attack = true;
+        move = true;
+        distanceToDamage = false;
+        isDeath = false;
+    }
+
 	void Update () {
 		Vector3 look = new Vector3 (player.transform.position.x, 0, player.transform.position.z);
 

@@ -35,9 +35,19 @@ public class EnemyMovement : MonoBehaviour
         nma.speed = speed;
     }
 
+    void OnEnable()
+    {
+        tmp = 0;
+        attack = true;
+        move = true;
+        distanceToDamage = false;
+        isDeath = false;
+    }
+
+
     void Update()
     {
-		Vector3 look = PlayerManager.instance.player.transform.position;
+        Vector3 look = PlayerManager.instance.player.transform.position;
 
         if (!isDeath)
         {
@@ -52,8 +62,8 @@ public class EnemyMovement : MonoBehaviour
 
             if (!distanceToDamage && move)
             {
-				nma.destination = look;
-				nma.speed = speed;
+                nma.destination = look;
+                nma.speed = speed;
             }
             else
             {
@@ -65,7 +75,7 @@ public class EnemyMovement : MonoBehaviour
                     attack = false;
                     move = false;
                     rg.velocity = Vector3.zero;
-					nma.speed = 0.00001f;
+                    nma.speed = 0.00001f;
                 }
                 else
                 {

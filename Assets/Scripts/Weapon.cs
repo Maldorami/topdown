@@ -14,7 +14,8 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private WeaponType type;
 
-    public GameObject bullet;
+    //public GameObject bullet;
+    public Pool BulletPoolManager;
     private BulletDamage bulletDamage;
 
     public float speed = 1;
@@ -29,7 +30,6 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         currentAmmo = Ammo;
-        bulletDamage = bullet.GetComponent<BulletDamage>();
     }
 
     void Update()
@@ -45,30 +45,61 @@ public class Weapon : MonoBehaviour
                     {
                         case WeaponType.pistol:
                             {
-                                bulletDamage.damage = 10;
-                                Instantiate(bullet, transform.position, transform.rotation);
+                                GameObject bullet = BulletPoolManager.Spawn().gameObject;
+                                bullet.transform.position = transform.position;
+                                bullet.transform.rotation = transform.rotation;
+                                bullet.GetComponent<BulletDamage>().damage = 10;
                                 break;
                             }
                         case WeaponType.shotgun:
                             {
-                                bulletDamage.damage = 30;
-                                Instantiate(bullet, transform.position, transform.rotation).transform.Rotate(0, Random.Range(-10, 10), 0);
-                                Instantiate(bullet, transform.position, transform.rotation).transform.Rotate(0, Random.Range(-10, 10), 0);
-                                Instantiate(bullet, transform.position, transform.rotation);
-                                Instantiate(bullet, transform.position, transform.rotation).transform.Rotate(0, -Random.Range(-10, 10), 0);
-                                Instantiate(bullet, transform.position, transform.rotation).transform.Rotate(0, -Random.Range(-10, 10), 0);
+                                GameObject bullet1 = BulletPoolManager.Spawn().gameObject;
+                                bullet1.transform.position = transform.position;
+                                bullet1.transform.rotation = transform.rotation;
+                                bullet1.transform.Rotate(0, Random.Range(-10, 10), 0);
+
+                                GameObject bullet2 = BulletPoolManager.Spawn().gameObject;
+                                bullet2.transform.position = transform.position;
+                                bullet2.transform.rotation = transform.rotation;
+                                bullet2.transform.Rotate(0, Random.Range(-10, 10), 0);
+
+                                GameObject bullet3 = BulletPoolManager.Spawn().gameObject;
+                                bullet3.transform.position = transform.position;
+                                bullet3.transform.rotation = transform.rotation;
+                                bullet3.transform.Rotate(0, -Random.Range(-10, 10), 0);
+
+                                GameObject bullet4 = BulletPoolManager.Spawn().gameObject;
+                                bullet4.transform.position = transform.position;
+                                bullet4.transform.rotation = transform.rotation;
+                                bullet4.transform.Rotate(0, -Random.Range(-10, 10), 0);
+
+                                GameObject bullet5 = BulletPoolManager.Spawn().gameObject;
+                                bullet5.transform.position = transform.position;
+                                bullet5.transform.rotation = transform.rotation;
+
+                                bullet1.GetComponent<BulletDamage>().damage = 30;
+                                bullet2.GetComponent<BulletDamage>().damage = 30;
+                                bullet3.GetComponent<BulletDamage>().damage = 30;
+                                bullet4.GetComponent<BulletDamage>().damage = 30;
+                                bullet5.GetComponent<BulletDamage>().damage = 30;
+
                                 break;
                             }
                         case WeaponType.machinegun:
                             {
-                                bulletDamage.damage = 5;
-                                Instantiate(bullet, transform.position, transform.rotation).transform.Rotate(0, Random.Range(-10,10), 0);
+                                GameObject bullet = BulletPoolManager.Spawn().gameObject;
+                                bullet.transform.position = transform.position;
+                                bullet.transform.rotation = transform.rotation;
+                                bullet.transform.Rotate(0, Random.Range(-10,10), 0);
+
+                                bullet.GetComponent<BulletDamage>().damage = 5;
+                                bullet.GetComponent<DestroyAt>().timer = 1;
                                 break;
                             }
 
                         default:
                             {
-                                Instantiate(bullet, transform.position, transform.rotation);
+                                //Instantiate(bullet, transform.position, transform.rotation);
                                 break;
                             }
                     }

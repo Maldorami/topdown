@@ -11,8 +11,10 @@ public class PlayerManager : MonoBehaviour {
 
     private bool isDeath = false;
 
-
 	public static PlayerManager instance;
+    public Rigidbody rgBody;
+
+
 	void Awake()
 	{
 		if (!instance) {
@@ -25,6 +27,7 @@ public class PlayerManager : MonoBehaviour {
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = maxPlayerHealth;
+        rgBody = player.GetComponent<Rigidbody>();
 	}
 		
 	void Update () {

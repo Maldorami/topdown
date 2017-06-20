@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class EnemyScreenSpaceUIScript : MonoBehaviour {
     
-    private EnemyHealth enemyScript;
+    public EnemyHealth enemyScript;
 
     public Canvas canvas;
-    public GameObject healthPrefab;
+    public Pool HealthBarPoolManager;
 
     public float healthPanelOffset = 1f;
     public GameObject healthPanel;
@@ -17,10 +17,9 @@ public class EnemyScreenSpaceUIScript : MonoBehaviour {
     void Start()
     {
         enemyScript = GetComponent<EnemyHealth>();
-        healthPanel = Instantiate(healthPrefab) as GameObject;
-        healthPanel.transform.SetParent(canvas.transform, false);
-        
+        healthPanel = HealthBarPoolManager.Spawn().gameObject;
         healthSlider = healthPanel.GetComponentInChildren<Slider>();
+        //healthPanel.transform.SetParent(canvas.transform, false);
     }
 
     void Update()
@@ -36,6 +35,6 @@ public class EnemyScreenSpaceUIScript : MonoBehaviour {
 
     public void DisableHealthPanel()
     {
-        if (healthPanel) Destroy(healthPanel);
+        if (healthPanel) healthPanel.GetComponent<PoolObject>().Recycl();
     }
 }
