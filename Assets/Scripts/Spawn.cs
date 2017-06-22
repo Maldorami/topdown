@@ -46,9 +46,6 @@ public class Spawn : MonoBehaviour {
         EnemyScreenSpaceUIScript healthBar = HealthBarPool.Spawn().gameObject.GetComponent<EnemyScreenSpaceUIScript>();
         healthBar.SetTarget(enemy);
 
-
-        enemy.GetComponent<EnemyHealth>().ammobox = AmmoBox;
-
         Vector2 tmp = Random.insideUnitCircle;
         tmp.Normalize();
         tmp *= 35;

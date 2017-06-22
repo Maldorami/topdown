@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class BomberDamage : MonoBehaviour
 {
-    GameObject partSystem;
+	ParticleSystem partSystem;
     public GameObject Body;
     public float damage;
 
     void Awake()
     {
         Transform tmp = transform.FindChild("BomberParticleSystem");
-        partSystem = tmp.gameObject;
+		partSystem = tmp.gameObject.GetComponent<ParticleSystem> ();
         tmp = transform.FindChild("Body");
         Body = tmp.gameObject;
     }
@@ -19,19 +19,17 @@ public class BomberDamage : MonoBehaviour
     private void OnDisable()
     {
         Body.SetActive(true);
-        partSystem.SetActive(false);
     }
 
     public void Attack(bool condition)
     {
-        gameObject.GetComponent<EnemyHealth>().health = 0;
         StartCoroutine("BOOM", condition);
     }
 
     IEnumerator BOOM(bool condition)
     {
         Body.SetActive(false);
-        partSystem.SetActive(true);
+		partSystem.Play ();
         
         if (condition)
         {
@@ -39,6 +37,8 @@ public class BomberDamage : MonoBehaviour
             PlayerManager.instance.attackPlayer(damage);
         }
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.2f);
+
+		gameObject.GetComponent<EnemyHealth>().health = 0;
     }
 }

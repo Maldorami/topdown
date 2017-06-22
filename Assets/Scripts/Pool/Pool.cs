@@ -8,7 +8,8 @@ public enum PoolType
     ZombieFast,
     Bomber,
     Bullet,
-    HealthBar
+    HealthBar,
+	AmmoBox
 }
 
 public class Pool : MonoBehaviour {
@@ -59,6 +60,11 @@ public class Pool : MonoBehaviour {
                     go = HealthBarBuilder.instance.Build();
                     break;
                 }
+			case (PoolType.AmmoBox):
+				{
+					go = AmmoBoxBuilder.instance.Build();
+					break;
+				}
             default:
                 {
                     go = EnemyBuilder.Instance.Build(EnemyBuilder.EnemyType.zombie);

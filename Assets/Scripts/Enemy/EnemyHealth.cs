@@ -8,7 +8,6 @@ public class EnemyHealth : MonoBehaviour {
     public float MaxHealth = 100;
 
     float tmp;
-    public GameObject ammobox;
 
     Animator anim;
     EnemyMovement em;
@@ -28,9 +27,7 @@ public class EnemyHealth : MonoBehaviour {
     void OnEnable()
     {
         health = MaxHealth;
-    }
-
-  
+    }  
 
     void OnTriggerEnter(Collider hit){
 		if (hit.tag == "Bullet") {
@@ -41,8 +38,11 @@ public class EnemyHealth : MonoBehaviour {
 	void Update(){
         if (health <= 0)
         {
-            if (em) em.isDeath = true;
-            else bem.isDeath = true;
+			if (em)
+				em.isDeath = true;
+			else {
+				bem.isDeath = true;
+			}
 
             anim.SetBool("Death", true);
 
@@ -54,11 +54,15 @@ public class EnemyHealth : MonoBehaviour {
             tmp += Time.deltaTime;
             if (tmp > 2.8f)
             {
-                if (Random.Range(0, 5) == 0)
+                if (true)
                 {
-                    ammobox.GetComponent<AmmoBox>().bulletsToGive = Random.Range(20, 50);
-                    Instantiate(ammobox, transform.position, transform.rotation);
+					AmmoBox ab = GameObject.Find ("AmmoBoxPoolManager").GetComponent<Pool> ().Spawn ().gameObject.GetComponent<AmmoBox>();
+					ab.bulletsToGive = Random.Range(20, 50);
+					ab.rot = 30;
+					ab.transform.position = gameObject.transform.position + Vector3.up * 1.5f;
+
                 }
+
                 Disable();
             }
         }
@@ -70,7 +74,8 @@ public class EnemyHealth : MonoBehaviour {
         rg.isKinematic = false;
         rg.useGravity = true;
         bc.enabled = true;
-                GetComponent<PoolObject>().Recycl();
-
+		tmp = 0;
+		anim.Rebind ();
+		GetComponent<PoolObject>().Recycl();
     }
 }

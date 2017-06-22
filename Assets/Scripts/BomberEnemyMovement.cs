@@ -10,9 +10,9 @@ public class BomberEnemyMovement : MonoBehaviour
 
 	float AttackTimer;
 	float tmp = 0;
-	bool attack = true;
-	bool move = true;
-	bool distanceToDamage = false;
+	public bool attack = true;
+	public bool move = true;
+	public bool distanceToDamage = false;
 
 	BomberDamage ed;
     Enemy en;

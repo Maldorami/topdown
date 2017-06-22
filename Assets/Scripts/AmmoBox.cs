@@ -17,7 +17,7 @@ public class AmmoBox : MonoBehaviour {
         {
             WeaponManager.instance.getCurrentWeaponAsWeapon().PartialyRefillBulletCarger(bulletsToGive);
             Debug.Log("<color=yellow>"+ WeaponManager.instance.getCurrentWeaponAsGameObject().name +"</color>");
-            Destroy(gameObject);
+			GetComponent<PoolObject> ().Recycl ();
         }
     }
 }
