@@ -15,7 +15,6 @@ public class EnemyHealth : MonoBehaviour {
     BomberEnemyMovement bem;
     Rigidbody rg;
     BoxCollider bc;
-    EnemyScreenSpaceUIScript ess;
 
     void Start()
     {
@@ -24,8 +23,6 @@ public class EnemyHealth : MonoBehaviour {
         em = gameObject.GetComponent<EnemyMovement>();
         bem = gameObject.GetComponent<BomberEnemyMovement>();
         bc = gameObject.GetComponent<BoxCollider>();
-        ess = gameObject.GetComponent<EnemyScreenSpaceUIScript>();
-        ess.enemyScript = this;
     }
 
     void OnEnable()
@@ -33,7 +30,9 @@ public class EnemyHealth : MonoBehaviour {
         health = MaxHealth;
     }
 
-	void OnTriggerEnter(Collider hit){
+  
+
+    void OnTriggerEnter(Collider hit){
 		if (hit.tag == "Bullet") {
 			health -= hit.gameObject.GetComponent<BulletDamage>().damage;
 		}
@@ -52,8 +51,6 @@ public class EnemyHealth : MonoBehaviour {
             rg.useGravity = false;
             bc.enabled = false;
 
-            if (ess) ess.DisableHealthPanel();
-
             tmp += Time.deltaTime;
             if (tmp > 2.8f)
             {
@@ -62,9 +59,18 @@ public class EnemyHealth : MonoBehaviour {
                     ammobox.GetComponent<AmmoBox>().bulletsToGive = Random.Range(20, 50);
                     Instantiate(ammobox, transform.position, transform.rotation);
                 }
-
-                GetComponent<PoolObject>().Recycl();
+                Disable();
             }
         }
 	}
+
+    private void Disable()
+    {
+        rg.velocity = Vector3.zero;
+        rg.isKinematic = false;
+        rg.useGravity = true;
+        bc.enabled = true;
+                GetComponent<PoolObject>().Recycl();
+
+    }
 }

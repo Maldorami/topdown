@@ -19,8 +19,6 @@ public class Pool : MonoBehaviour {
 
     private List<PoolObject> objects = new List<PoolObject>();
 
-    public GameObject healthbarPrefab;
-
 	void Awake () {
         for (int i = 0; i < count; i++)
         {
@@ -58,7 +56,7 @@ public class Pool : MonoBehaviour {
                 }
             case (PoolType.HealthBar):
                 {
-                    go = Instantiate(healthbarPrefab);
+                    go = HealthBarBuilder.instance.Build();
                     break;
                 }
             default:

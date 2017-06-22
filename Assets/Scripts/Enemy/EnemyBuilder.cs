@@ -38,7 +38,6 @@ public class EnemyBuilder : MonoBehaviour {
                 Enemy et = go.AddComponent<Enemy>();
                 et.type = type;
 				EnemyHealth eh = go.AddComponent<EnemyHealth> ();
-                EnemyScreenSpaceUIScript ess = go.AddComponent<EnemyScreenSpaceUIScript>();
 
                 NavMeshAgent nma = go.AddComponent<NavMeshAgent>();
                 nma.radius = 0.06f;
@@ -71,7 +70,6 @@ public class EnemyBuilder : MonoBehaviour {
                 Enemy et = go.AddComponent<Enemy>();
                 et.type = type;
                 EnemyHealth eh = go.AddComponent<EnemyHealth>();
-                EnemyScreenSpaceUIScript ess = go.AddComponent<EnemyScreenSpaceUIScript>();
 
                 NavMeshAgent nma = go.AddComponent<NavMeshAgent>();
                 nma.radius = 0.06f;
@@ -102,8 +100,7 @@ public class EnemyBuilder : MonoBehaviour {
                 BomberDamage ed = go.AddComponent<BomberDamage>();
                 Enemy et = go.AddComponent<Enemy>();
                 et.type = type;
-                EnemyHealth eh = go.AddComponent<EnemyHealth>();
-                EnemyScreenSpaceUIScript ess = go.AddComponent<EnemyScreenSpaceUIScript>();
+                EnemyHealth eh = go.AddComponent<EnemyHealth>();                
 
                 NavMeshAgent nma = go.AddComponent<NavMeshAgent>();
                 nma.radius = 0.06f;

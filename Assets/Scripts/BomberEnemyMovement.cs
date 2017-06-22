@@ -31,7 +31,6 @@ public class BomberEnemyMovement : MonoBehaviour
 		anim = GetComponent<Animator> ();
         ed = GetComponent<BomberDamage>();
         en = GetComponent<Enemy>();
-
         nma = GetComponent<NavMeshAgent>();
         nma.speed = speed;
 	}
@@ -43,6 +42,7 @@ public class BomberEnemyMovement : MonoBehaviour
         move = true;
         distanceToDamage = false;
         isDeath = false;
+        alreadyAttack = false;
     }
 
 	void Update () {

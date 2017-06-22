@@ -4,46 +4,41 @@ using UnityEngine;
 
 public class BomberDamage : MonoBehaviour
 {
-
-    GameObject particleSystem;
-    GameObject Body;
-
-    float timer;
-
+    GameObject partSystem;
+    public GameObject Body;
     public float damage;
 
-    EnemyScreenSpaceUIScript ess;
-
-    void Start()
+    void Awake()
     {
-        Transform tmp = transform.Find("BomberParticleSystem");
-        particleSystem = tmp.gameObject;
-
-        tmp = transform.Find("Body");
+        Transform tmp = transform.FindChild("BomberParticleSystem");
+        partSystem = tmp.gameObject;
+        tmp = transform.FindChild("Body");
         Body = tmp.gameObject;
+    }
 
-        ess = gameObject.GetComponent<EnemyScreenSpaceUIScript>();
+    private void OnDisable()
+    {
+        Body.SetActive(true);
+        partSystem.SetActive(false);
     }
 
     public void Attack(bool condition)
     {
+        gameObject.GetComponent<EnemyHealth>().health = 0;
         StartCoroutine("BOOM", condition);
     }
 
     IEnumerator BOOM(bool condition)
     {
         Body.SetActive(false);
-        particleSystem.SetActive(true);
+        partSystem.SetActive(true);
         
         if (condition)
         {
             Debug.Log("<color=green>BomberAttack!</color>");
             PlayerManager.instance.attackPlayer(damage);
         }
-
-        if (ess) ess.DisableHealthPanel();
-
-        yield return new WaitForSeconds(1f);        
-        Destroy(gameObject);
+        
+        yield return new WaitForSeconds(1f);
     }
 }

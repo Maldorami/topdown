@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Spawn : MonoBehaviour {
 
@@ -42,10 +43,9 @@ public class Spawn : MonoBehaviour {
                 }
         }
 
-        EnemyScreenSpaceUIScript ess = enemy.GetComponent<EnemyScreenSpaceUIScript>();
-        ess.canvas = canvas;
-        ess.enemyScript = enemy.GetComponent<EnemyHealth>();
-        ess.HealthBarPoolManager = HealthBarPool;
+        EnemyScreenSpaceUIScript healthBar = HealthBarPool.Spawn().gameObject.GetComponent<EnemyScreenSpaceUIScript>();
+        healthBar.SetTarget(enemy);
+
 
         enemy.GetComponent<EnemyHealth>().ammobox = AmmoBox;
 
