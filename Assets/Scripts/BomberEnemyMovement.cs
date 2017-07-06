@@ -96,6 +96,6 @@ public class BomberEnemyMovement : MonoBehaviour
         {
 			nma.speed = 0.00001f;
         }
-	}
+	} 
 }
 
