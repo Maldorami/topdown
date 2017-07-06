@@ -18,6 +18,7 @@ public class AmmoBoxBuilder : MonoBehaviour {
 
 		go.AddComponent <AmmoBox>();
 		BoxCollider bc = go.AddComponent <BoxCollider>();
+        go.layer = 10;
 		bc.isTrigger = true;
 		return go;
 	}

@@ -13,10 +13,8 @@ public class Weapon : MonoBehaviour
 
     [SerializeField]
     private WeaponType type;
-
-    //public GameObject bullet;
+    
     public Pool BulletPoolManager;
-    private BulletDamage bulletDamage;
 
     public float speed = 1;
 
@@ -26,10 +24,13 @@ public class Weapon : MonoBehaviour
 
     float timer = 0;
 
+    AudioSource sx;
+    bool machinegun = false;
 
     void Start()
     {
         currentAmmo = Ammo;
+        sx = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -37,6 +38,7 @@ public class Weapon : MonoBehaviour
         timer += Time.deltaTime;
 
         if (InputManager.instance.Fire())
+        {
             if (timer > speed)
             {
                 if (currentAmmo > 0)
@@ -49,6 +51,9 @@ public class Weapon : MonoBehaviour
                                 bullet.transform.position = transform.position;
                                 bullet.transform.rotation = transform.rotation;
                                 bullet.GetComponent<BulletDamage>().damage = 10;
+
+                                PlaySX();
+
                                 break;
                             }
                         case WeaponType.shotgun:
@@ -83,6 +88,8 @@ public class Weapon : MonoBehaviour
                                 bullet4.GetComponent<BulletDamage>().damage = 30;
                                 bullet5.GetComponent<BulletDamage>().damage = 30;
 
+                                sx.Play();
+
                                 break;
                             }
                         case WeaponType.machinegun:
@@ -90,16 +97,21 @@ public class Weapon : MonoBehaviour
                                 GameObject bullet = BulletPoolManager.Spawn().gameObject;
                                 bullet.transform.position = transform.position;
                                 bullet.transform.rotation = transform.rotation;
-                                bullet.transform.Rotate(0, Random.Range(-10,10), 0);
+                                bullet.transform.Rotate(0, Random.Range(-10, 10), 0);
 
                                 bullet.GetComponent<BulletDamage>().damage = 5;
                                 bullet.GetComponent<DestroyAt>().timer = 1;
+
+                                if (!sx.isPlaying)
+                                {
+                                    sx.Play();
+                                }
+
                                 break;
                             }
 
                         default:
                             {
-                                //Instantiate(bullet, transform.position, transform.rotation);
                                 break;
                             }
                     }
@@ -112,6 +124,12 @@ public class Weapon : MonoBehaviour
                     WeaponManager.instance.SetDefaultGun();
                 }
             }
+        }
+        else
+        {
+            if(type == WeaponType.machinegun)
+            sx.Stop();
+        }
     }
 
     public void Activate()
@@ -136,5 +154,15 @@ public class Weapon : MonoBehaviour
         {
             TotalyRefillBulletCarger();
         }
+    }
+
+    void PlaySX()
+    {
+        if (sx.isPlaying)
+        {
+            sx.Stop();
+        }
+
+        sx.Play();
     }
 }
