@@ -17,7 +17,7 @@ public class InputManager : MonoBehaviour {
             Destroy(gameObject);
         }
 
-#if UNITY_EDITOR
+#if UNITY_STANDALONE
         input = new InputKeyboard();
 #elif UNITY_ANDROID
         input = new InputMobile();

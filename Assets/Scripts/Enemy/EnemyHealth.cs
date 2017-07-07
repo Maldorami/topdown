@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour {
 
     public float health;
-    public float MaxHealth = 100;
+    public float MaxHealth;
 
     float tmp;
 
@@ -54,13 +54,12 @@ public class EnemyHealth : MonoBehaviour {
             tmp += Time.deltaTime;
             if (tmp > 2.8f)
             {
-                if (true)
+                if (Random.Range(0, 5) == 1)
                 {
 					AmmoBox ab = GameObject.Find ("AmmoBoxPoolManager").GetComponent<Pool> ().Spawn ().gameObject.GetComponent<AmmoBox>();
 					ab.bulletsToGive = Random.Range(20, 50);
 					ab.rot = 30;
 					ab.transform.position = gameObject.transform.position + Vector3.up * 1.5f;
-
                 }
 
                 Disable();

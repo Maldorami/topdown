@@ -119,7 +119,8 @@ public class EnemyBuilder : MonoBehaviour {
 
                 enmMov.speed = 12;
                 ed.damage = 75;
-                eh.MaxHealth = 150;              
+                eh.MaxHealth = eh.health = 150;
+                
 
                 go.tag = "Enemy";
                 return go;
